@@ -21,6 +21,6 @@
             <Views:FlightBoard Grid.Column="0" Grid.Row="1" Margin="-73,10,27.8,-10"></Views:FlightBoard>
             <Views:Joystick Width="10px"></Views:Joystick>
         </Grid>-->
-        <Views:FlightScreen></Views:FlightScreen>
+        <Views:ControlScreen></Views:ControlScreen>
     </Viewbox>
 </Window>

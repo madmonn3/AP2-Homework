@@ -19,8 +19,8 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Button Grid.Column="0" Width="auto" Height="auto" FontSize="16" Margin="10">Connect</Button>
-            <Button Grid.Column="1" Width="auto" Height="auto" FontSize="16">Settings</Button>
+            <Button Grid.Column="0" Width="auto" Height="auto" FontSize="16" Margin="10" VerticalAlignment="Center" HorizontalAlignment="Right">Connect</Button>
+            <Button Grid.Column="1" Width="auto" Height="auto" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Left">Settings</Button>
         </Grid>
         <local:FlightBoard Grid.Row="1" Grid.Column="1"></local:FlightBoard>
     </Grid>
