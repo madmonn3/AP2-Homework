@@ -7,7 +7,10 @@
              xmlns:ViewModels="clr-namespace:FlightSimulator.ViewModels"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800" >
-    <Grid>
+    <UserControl.Resources>
+        <ViewModels:AutoPilotVM x:Key="AutoPilotVM" x:Name="AutoPilotVM"/>
+    </UserControl.Resources>
+    <Grid DataContext="{StaticResource AutoPilotVM}">
         <Viewbox>
         <TabControl FontSize="12"
                     VerticalAlignment="Center"
@@ -30,16 +33,19 @@
                             <ColumnDefinition Width="*"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
                         <DataGrid Height="{Binding ElementName=joystick, Path=ActualHeight}" />
-                        <TextBox Grid.ColumnSpan="2"
+                        <TextBox x:Name="scriptBox"
+                             Grid.ColumnSpan="2"
                              VerticalAlignment="Stretch"
                              HorizontalAlignment="Stretch" 
                              ScrollViewer.VerticalScrollBarVisibility="Auto" 
                              AcceptsReturn="True"
                              Width="{Binding ElementName=joystick, Path=ActualWidth}"
-                             Text="{Binding Path=ClearCommand, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                        <Button Grid.Row="1">OK</Button>
+                             Text="{Binding Script, UpdateSourceTrigger=PropertyChanged}"/>
+                        <Button Grid.Row="1"
+                                >OK</Button>
                         <Button Grid.Row="1" 
-                                Grid.Column="1">Clear</Button>
+                                Grid.Column="1"
+                                Command="{Binding ClearCommand}">Clear</Button>
                     </Grid>
                 </TabItem>
         </TabControl>

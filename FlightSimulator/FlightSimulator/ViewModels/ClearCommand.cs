@@ -23,15 +23,14 @@ namespace FlightSimulator.ViewModels
 
             set
             {
-                if (value == "K")
-                    System.Windows.Forms.MessageBox.Show("K!!!");
                 s = value;
+
             }
         }
 
         public ClearCommand()
         {
-            AutoPilotScript = "hello";
+            AutoPilotScript = "Insert script here";
         }
         public bool CanExecute(object parameter)
         {
@@ -45,7 +44,6 @@ namespace FlightSimulator.ViewModels
 
         public void NotifyPropertyChanged(string propName)
         {
-            System.Windows.Forms.MessageBox.Show("CHACONNTECTEDNGED!");
             this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propName));
         }
     }
