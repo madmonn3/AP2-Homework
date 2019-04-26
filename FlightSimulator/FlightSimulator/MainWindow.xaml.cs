@@ -22,6 +22,7 @@ namespace FlightSimulator
         public MainWindow()
         {
             InitializeComponent();
+            //this.DataContext = new ViewModels.ClearCommand();
         }
 
         private void Joystick_Loaded()
