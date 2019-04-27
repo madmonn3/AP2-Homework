@@ -1,0 +1,35 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:FlightSimulator"
+        xmlns:ViewModels="clr-namespace:FlightSimulator.ViewModels" x:Class="FlightSimulator.MainWindow"
+        xmlns:Views="clr-namespace:FlightSimulator.Views"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <!--<Window.Resources>
+        <ViewModels:ClearCommand x:Key="bla" x:Name="bla"/>
+    </Window.Resources>-->
+    <!--<Viewbox>-->
+
+    <Viewbox>
+        <!--<Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock HorizontalAlignment="Center" Padding="3" Margin="3" Grid.Row="0" Grid.ColumnSpan="2" FontSize="20px">Flight Simulator</TextBlock>
+            <Views:FlightBoard Grid.Column="0" Grid.Row="1" Margin="-73,10,27.8,-10"></Views:FlightBoard>
+            <Views:Joystick Width="10px"></Views:Joystick>
+        </Grid>-->
+        <Views:ControlScreen></Views:ControlScreen>
+        <!--<TextBox Text="{Binding AutoPilotScript, UpdateSourceTrigger=PropertyChanged}"/>-->
+        <!--<TextBox/>-->
+     </Viewbox>
+    <!--</Viewbox>-->
+</Window>

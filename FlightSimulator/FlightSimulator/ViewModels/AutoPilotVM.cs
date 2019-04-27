@@ -26,11 +26,10 @@ namespace FlightSimulator.ViewModels
         }
 
         private ICommand okCommand;
-
         public ICommand OkCommand {
             get
             {
-                if (okCommand != null)
+                if (okCommand == null)
                 {
                     okCommand = new CommandHandler(delegate
                     {
@@ -42,7 +41,6 @@ namespace FlightSimulator.ViewModels
         }
 
         private ICommand clearCommand;
-
         public ICommand ClearCommand
         {
             get

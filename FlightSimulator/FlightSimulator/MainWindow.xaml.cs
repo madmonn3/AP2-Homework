@@ -24,10 +24,5 @@ namespace FlightSimulator
             InitializeComponent();
             //this.DataContext = new ViewModels.ClearCommand();
         }
-
-        private void Joystick_Loaded()
-        {
-
-        }
     }
 }

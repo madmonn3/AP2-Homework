@@ -3,10 +3,14 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:ViewModels="clr-namespace:FlightSimulator.ViewModels"
              xmlns:local="clr-namespace:FlightSimulator.Views"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid x:Name="FlightScreenGrid">
+    <UserControl.Resources>
+        <ViewModels:FlightScreenVM x:Key="FlightScreenVM" x:Name="FlightScreenVM" />
+    </UserControl.Resources>
+    <Grid x:Name="FlightScreenGrid" DataContext="{StaticResource FlightScreenVM}">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
@@ -19,8 +23,12 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Button Grid.Column="0" Width="auto" Height="auto" FontSize="16" Margin="10" VerticalAlignment="Center" HorizontalAlignment="Right">Connect</Button>
-            <Button Grid.Column="1" Width="auto" Height="auto" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Left">Settings</Button>
+            <Button Grid.Column="0" Width="auto" Height="auto" FontSize="16" Margin="10" VerticalAlignment="Center" HorizontalAlignment="Right"
+                    
+                    >Connect</Button>
+            <Button Grid.Column="1" Width="auto" Height="auto" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Left"
+                    Command="{Binding SettingsCommand}"
+                    >Settings</Button>
         </Grid>
         <local:FlightBoard Grid.Row="1" Grid.Column="1"></local:FlightBoard>
     </Grid>

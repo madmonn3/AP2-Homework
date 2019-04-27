@@ -32,7 +32,7 @@
                             <ColumnDefinition Width="*"></ColumnDefinition>
                             <ColumnDefinition Width="*"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
-                        <DataGrid Height="{Binding ElementName=joystick, Path=ActualHeight}" />
+                        <DataGrid Height="{Binding ElementName=joystick, Path=ActualHeight}"/>
                         <TextBox x:Name="scriptBox"
                              Grid.ColumnSpan="2"
                              VerticalAlignment="Stretch"

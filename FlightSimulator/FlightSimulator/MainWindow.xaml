@@ -16,7 +16,7 @@
             <ColumnDefinition Width="*"></ColumnDefinition>
             <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <Views:FlightScreen Grid.Column="0"></Views:FlightScreen>
+        <Views:FlightScreen Grid.Column="0" Margin="0 0 20 0"></Views:FlightScreen>
         <Views:ControlScreen Grid.Column="1"></Views:ControlScreen>
     </Grid>
     <!--<Grid>

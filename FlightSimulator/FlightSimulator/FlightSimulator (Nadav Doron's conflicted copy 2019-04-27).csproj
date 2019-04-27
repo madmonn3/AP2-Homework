@@ -69,7 +69,9 @@
     <Compile Include="Model\Interface\ISettingsModel.cs" />
     <Compile Include="ViewModels\AutoPilotVM.cs" />
     <Compile Include="ViewModels\BaseNotify.cs" />
-    <Compile Include="ViewModels\FlightScreenVM.cs" />
+    <Compile Include="ViewModels\ClearCommand.cs" />
+    <Compile Include="ViewModels\Commands\ClearCommand.cs" />
+    <Compile Include="ViewModels\FlightBoardViewModel.cs" />
     <Compile Include="ViewModels\Windows\SettingsWindowViewModel.cs" />
     <Compile Include="Views\ControlScreen.xaml.cs">
       <DependentUpon>ControlScreen.xaml</DependentUpon>
@@ -86,9 +88,6 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Views\Windows\SettingsWindow.xaml.cs">
-      <DependentUpon>SettingsWindow.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <SubType>Designer</SubType>
@@ -107,10 +106,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Joystick.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Windows\SettingsWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -143,7 +138,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="ViewModels\Commands\" />
+    <Folder Include="Views\Windows\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
