@@ -12,10 +12,6 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-// delete after use! 
-using FlightSimulator.Views.Windows;
-
-
 namespace FlightSimulator
 {
     /// <summary>
@@ -26,8 +22,7 @@ namespace FlightSimulator
         public MainWindow()
         {
             InitializeComponent();
-            SettingsWindow settingsWindow = new SettingsWindow();
-            settingsWindow.ShowDialog();
+            //this.DataContext = new ViewModels.ClearCommand();
         }
 
         private void Joystick_Loaded()

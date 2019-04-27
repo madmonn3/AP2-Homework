@@ -4,9 +4,15 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FlightSimulator"
-        xmlns:Views="clr-namespace:FlightSimulator.Views" x:Class="FlightSimulator.MainWindow"
+        xmlns:ViewModels="clr-namespace:FlightSimulator.ViewModels" x:Class="FlightSimulator.MainWindow"
+        xmlns:Views="clr-namespace:FlightSimulator.Views"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
+    <!--<Window.Resources>
+        <ViewModels:ClearCommand x:Key="bla" x:Name="bla"/>
+    </Window.Resources>-->
+    <!--<Viewbox>-->
+
     <Viewbox>
         <!--<Grid>
             <Grid.RowDefinitions>
@@ -22,5 +28,8 @@
             <Views:Joystick Width="10px"></Views:Joystick>
         </Grid>-->
         <Views:ControlScreen></Views:ControlScreen>
-    </Viewbox>
+        <!--<TextBox Text="{Binding AutoPilotScript, UpdateSourceTrigger=PropertyChanged}"/>-->
+        <!--<TextBox/>-->
+     </Viewbox>
+    <!--</Viewbox>-->
 </Window>

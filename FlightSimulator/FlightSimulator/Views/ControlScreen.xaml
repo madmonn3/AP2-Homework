@@ -4,43 +4,50 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:FlightSimulator.Views"
+             xmlns:ViewModels="clr-namespace:FlightSimulator.ViewModels"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
+             d:DesignHeight="450" d:DesignWidth="800" >
+    <UserControl.Resources>
+        <ViewModels:AutoPilotVM x:Key="AutoPilotVM" x:Name="AutoPilotVM"/>
+    </UserControl.Resources>
+    <Grid DataContext="{StaticResource AutoPilotVM}">
         <Viewbox>
         <TabControl FontSize="12"
                     VerticalAlignment="Center"
                     HorizontalAlignment="Center">
             <TabItem Header="Manual">
-                <local:Joystick />
+                <local:Joystick x:Name="joystick" />
             </TabItem>
             <TabItem Header="Auto Pilot"
                      VerticalAlignment="Stretch"
                      HorizontalAlignment="Stretch" >
-                <Grid x:Name="ControlScreenGrid"
+                    <Grid x:Name="ControlScreenGrid"
                       VerticalAlignment="Stretch" 
                       HorizontalAlignment="Stretch">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="*"></RowDefinition>
-                        <RowDefinition Height="auto"></RowDefinition>
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"></ColumnDefinition>
-                        <ColumnDefinition Width="*"></ColumnDefinition>
-                    </Grid.ColumnDefinitions>
-                    <TextBox Grid.ColumnSpan="2"
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"></RowDefinition>
+                            <RowDefinition Height="auto"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <DataGrid Height="{Binding ElementName=joystick, Path=ActualHeight}" />
+                        <TextBox x:Name="scriptBox"
+                             Grid.ColumnSpan="2"
                              VerticalAlignment="Stretch"
                              HorizontalAlignment="Stretch" 
                              ScrollViewer.VerticalScrollBarVisibility="Auto" 
-                             AcceptsReturn="True">
-                        insert script here
-                    </TextBox>
-                    <Button Grid.Row="1">b1</Button>
-                    <Button Grid.Row="1" 
-                            Grid.Column="1">b2</Button>
-                </Grid>
-
-            </TabItem>
+                             AcceptsReturn="True"
+                             Width="{Binding ElementName=joystick, Path=ActualWidth}"
+                             Text="{Binding Script, UpdateSourceTrigger=PropertyChanged}"/>
+                        <Button Grid.Row="1"
+                                >OK</Button>
+                        <Button Grid.Row="1" 
+                                Grid.Column="1"
+                                Command="{Binding ClearCommand}">Clear</Button>
+                    </Grid>
+                </TabItem>
         </TabControl>
         </Viewbox>
     </Grid>
