@@ -13,7 +13,29 @@
                     VerticalAlignment="Center"
                     HorizontalAlignment="Center">
             <TabItem Header="Manual">
-                <local:Joystick x:Name="joystick" />
+                <Grid Cursor="">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Grid.Row="1" Grid.Column="1">
+                            <Slider Value="{Binding Rudder, UpdateSourceTrigger=PropertyChanged}" />
+                            <Label Content="←Rudder→" HorizontalAlignment="Center" Margin="1" Padding="1"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                            <Label Content="←Throttle→" VerticalAlignment="Center">
+                                <Label.LayoutTransform>
+                                    <RotateTransform Angle="90"/>
+                                </Label.LayoutTransform>
+                            </Label>
+                            <Slider Value="{Binding Throttle, UpdateSourceTrigger=PropertyChanged}" Orientation="Vertical" TickPlacement="TopLeft"  />
+                    </StackPanel>
+                        <local:Joystick x:Name="joystick" Grid.Column="1" />
+                </Grid>
             </TabItem>
             <TabItem Header="Auto Pilot"
                      VerticalAlignment="Stretch"

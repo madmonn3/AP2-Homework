@@ -15,5 +15,12 @@
         <Style TargetType="TextBlock">
             <Setter Property="Margin" Value="3" />
         </Style>
+        <Style TargetType="Slider">
+            <Setter Property="TickFrequency" Value="1"/>
+            <Setter Property="TickPlacement" Value="BottomRight"/>
+        </Style>
+        <Style TargetType="Label">
+            <Setter Property="FontWeight" Value="Bold"/>
+        </Style>
     </Application.Resources>
 </Application>

@@ -64,8 +64,8 @@ namespace FlightSimulator
 
         protected override void OnExit(ExitEventArgs e)
         {
-            ControlScreenVM.CommandsSock.Close();
-            FlightScreenVM.InfoSock.Close();
+            ControlScreenVM?.CommandsSock.Close();
+            FlightScreenVM?.InfoSock.Close();
             base.OnExit(e);
         }
     }

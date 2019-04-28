@@ -46,6 +46,7 @@ namespace FlightSimulator.ViewModels
                     conncetCommand = new CommandHandler(delegate
                     {
                         // connect as server
+                        // must move to MODEL!!!
                         Socket client, listener = new Socket(SocketType.Stream, ProtocolType.Tcp);
                         EndPoint endPoint = new IPEndPoint(IPAddress.Any, App.SettingsWindowVM.FlightInfoPort);
                         listener.Bind(endPoint);

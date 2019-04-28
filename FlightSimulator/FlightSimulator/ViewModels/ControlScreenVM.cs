@@ -11,8 +11,8 @@ namespace FlightSimulator.ViewModels
 {
     public class ControlScreenVM : BaseNotify
     {
-        public Socket CommandsSock { get; set; }
-
+        #region Properties
+        #region Script
         private string script;
         public string Script
         {
@@ -27,6 +27,44 @@ namespace FlightSimulator.ViewModels
                 this.NotifyPropertyChanged("Script");
             }
         }
+        #endregion
+
+        #region Throttle
+        private double throttle;
+
+        public double Throttle
+        {
+            get
+            {
+                return throttle;
+            }
+            set
+            {
+                throttle = value;
+                this.NotifyPropertyChanged("Throttle");
+            }
+        }
+        #endregion
+
+        #region Rudder
+        private double rudder;
+
+        public double Rudder
+        {
+            get
+            {
+                return rudder;
+            }
+            set
+            {
+                rudder = value;
+                this.NotifyPropertyChanged("Rudder");
+            }
+        }
+        #endregion
+
+        public Socket CommandsSock { get; set; }
+        #endregion
 
         #region Commands
         #region OkCommand
