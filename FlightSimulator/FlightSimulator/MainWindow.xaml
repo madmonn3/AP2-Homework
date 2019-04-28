@@ -7,10 +7,8 @@
         xmlns:ViewModels="clr-namespace:FlightSimulator.ViewModels" x:Class="FlightSimulator.MainWindow"
         xmlns:Views="clr-namespace:FlightSimulator.Views"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <!--<Window.Resources>
-        <ViewModels:ClearCommand x:Key="bla" x:Name="bla"/>
-    </Window.Resources>-->
+        Title="MainWindow" Height="450" Width="800"
+        WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"></ColumnDefinition>
@@ -32,6 +30,4 @@
         <Views:FlightBoard Grid.Column="0" Grid.Row="1" Margin="-73,10,27.8,-10"></Views:FlightBoard>
         <Views:Joystick Width="10px"></Views:Joystick>
     </Grid>-->
-    <!--<TextBox Text="{Binding AutoPilotScript, UpdateSourceTrigger=PropertyChanged}"/>
-    <TextBox/>-->
 </Window>

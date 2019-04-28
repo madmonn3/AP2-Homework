@@ -4,13 +4,10 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:FlightSimulator.Views"
-             xmlns:ViewModels="clr-namespace:FlightSimulator.ViewModels"
+             xmlns:FlightSimulator="clr-namespace:FlightSimulator"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800" >
-    <UserControl.Resources>
-        <ViewModels:AutoPilotVM x:Key="AutoPilotVM" x:Name="AutoPilotVM"/>
-    </UserControl.Resources>
-    <Grid DataContext="{StaticResource AutoPilotVM}">
+    <Grid DataContext="{x:Static FlightSimulator:App.ControlScreenVM}">
         <Viewbox>
         <TabControl FontSize="12"
                     VerticalAlignment="Center"
@@ -42,6 +39,7 @@
                              Width="{Binding ElementName=joystick, Path=ActualWidth}"
                              Text="{Binding Script, UpdateSourceTrigger=PropertyChanged}"/>
                         <Button Grid.Row="1"
+                                Command="{Binding OkCommand}"
                                 >OK</Button>
                         <Button Grid.Row="1" 
                                 Grid.Column="1"

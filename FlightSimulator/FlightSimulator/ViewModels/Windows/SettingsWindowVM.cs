@@ -10,11 +10,11 @@ using System.Windows.Input;
 
 namespace FlightSimulator.ViewModels.Windows
 {
-    public class SettingsWindowViewModel : BaseNotify
+    public class SettingsWindowVM : BaseNotify
     {
         private ISettingsModel model;
 
-        public SettingsWindowViewModel(ISettingsModel model)
+        public SettingsWindowVM(ISettingsModel model)
         {
             this.model = model;
         }

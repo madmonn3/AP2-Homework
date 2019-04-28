@@ -2,14 +2,17 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace FlightSimulator.ViewModels
 {
-    class AutoPilotVM : BaseNotify
+    public class ControlScreenVM : BaseNotify
     {
+        public Socket CommandsSock { get; set; }
+
         private string script;
         public string Script
         {
@@ -25,6 +28,8 @@ namespace FlightSimulator.ViewModels
             }
         }
 
+        #region Commands
+        #region OkCommand
         private ICommand okCommand;
         public ICommand OkCommand {
             get
@@ -33,13 +38,15 @@ namespace FlightSimulator.ViewModels
                 {
                     okCommand = new CommandHandler(delegate
                     {
-                        throw new NotImplementedException();
+                        CommandsSock.Send(Encoding.ASCII.GetBytes(Script));
                     });
                 }
                 return okCommand;
             }
         }
+        #endregion
 
+        #region ClearCommand
         private ICommand clearCommand;
         public ICommand ClearCommand
         {
@@ -55,5 +62,7 @@ namespace FlightSimulator.ViewModels
                 return clearCommand;
             }
         }
+        #endregion
+        #endregion
     }
 }

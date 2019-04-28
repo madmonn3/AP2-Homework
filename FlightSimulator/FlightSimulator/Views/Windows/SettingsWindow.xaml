@@ -4,11 +4,13 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FlightSimulator.Views.Windows"
+        xmlns:FlightBoard="clr-namespace:FlightSimulator"
+        xmlns:ViewModelsWindows="clr-namespace:FlightSimulator.ViewModels.Windows"
         mc:Ignorable="d"
         Title="Settings"
         SizeToContent="WidthAndHeight"
         WindowStartupLocation="CenterScreen">
-    <Grid>
+    <Grid DataContext="{x:Static FlightBoard:App.SettingsWindowVM}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="200"/>
@@ -21,18 +23,21 @@
         </Grid.RowDefinitions>
 
         <TextBlock Grid.Row="0"> Flight Server IP: </TextBlock>
-        <TextBox x:Name="ServerIP" Grid.Column="1" Grid.Row="0" ></TextBox>
+        <TextBox x:Name="ServerIP" Grid.Column="1" Grid.Row="0"
+                 Text="{Binding FlightServerIP}"></TextBox>
         
         <TextBlock Grid.Row="1" Margin="3"> Fight Info Port: </TextBlock>
-        <TextBox x:Name="InfoPort" Grid.Column="1" Grid.Row="1" ></TextBox>
+        <TextBox x:Name="InfoPort" Grid.Column="1" Grid.Row="1"
+                 Text="{Binding FlightInfoPort}"></TextBox>
         
         <TextBlock Grid.Row="2"> Flight Command Port: </TextBlock>
-        <TextBox x:Name="CommandPort" Grid.Column="1" Grid.Row="2"></TextBox>
+        <TextBox x:Name="CommandPort" Grid.Column="1" Grid.Row="2" 
+                 Text="{Binding FlightCommandPort}"></TextBox>
         
         <WrapPanel HorizontalAlignment="Center"
                    Grid.Row="3" Grid.ColumnSpan="2" >
-            <Button> OK </Button>
-            <Button> Cancel </Button>
+            <Button Click="Ok_Click"> OK </Button>
+            <Button Click="Cancel_Click"> Cancel </Button>
         </WrapPanel>
     </Grid>
 </Window>

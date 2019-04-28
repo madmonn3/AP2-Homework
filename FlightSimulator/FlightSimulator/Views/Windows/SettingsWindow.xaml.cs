@@ -1,4 +1,7 @@
-﻿using System;
+﻿using FlightSimulator.Model;
+using FlightSimulator.Model.Interface;
+using FlightSimulator.ViewModels.Windows;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,10 +21,28 @@ namespace FlightSimulator.Views.Windows
     /// Interaction logic for SettingsWindow.xaml
     /// </summary>
     public partial class SettingsWindow : Window
-    {
+    {        
         public SettingsWindow()
         {
             InitializeComponent();
+        }
+
+        private void Cancel_Click(object sender, RoutedEventArgs e)
+        {
+            if (App.SettingsWindowVM.CancelCommand.CanExecute(e))
+            {
+                App.SettingsWindowVM.CancelCommand.Execute(e);
+            }
+            Close();
+        }
+
+        private void Ok_Click(object sender, RoutedEventArgs e)
+        {
+            if (App.SettingsWindowVM.ClickCommand.CanExecute(e))
+            {
+                App.SettingsWindowVM.ClickCommand.Execute(e);
+            }
+            this.Close();
         }
     }
 }
