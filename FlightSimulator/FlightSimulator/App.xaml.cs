@@ -49,11 +49,25 @@ namespace FlightSimulator
             {
                 if (flightScreenVM == null)
                 {
-                    flightScreenVM = new FlightScreenVM();
+                    flightScreenVM = new FlightScreenVM(FlightModel);
                 }
                 return flightScreenVM;
             }
         }
+
+                private static FlightModel flightModel;
+        public static FlightModel FlightModel
+        {
+            get
+            {
+                if (flightModel == null)
+                {
+                    flightModel = new FlightModel();
+                }
+                return flightModel;
+            }
+        }
+
 
         protected override void OnStartup(StartupEventArgs e)
         {
@@ -68,5 +82,8 @@ namespace FlightSimulator
             FlightScreenVM?.InfoSock.Close();
             base.OnExit(e);
         }
+
+
+
     }
 }

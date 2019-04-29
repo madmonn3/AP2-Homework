@@ -1,21 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Sockets;
+﻿using System.Net.Sockets;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace FlightSimulator.Model
 {
-    class ControlModel
+    public class FlightModel
     {
-        void Send(Socket socket, string s)
+        #region Properties
+        public Socket InfoSock { get; set; }
+        public Socket CommandsSock { get; set; }
+        #endregion
+
+        public void Send(string s)
         {
-            socket.Send(Encoding.ASCII.GetBytes(s));
+            CommandsSock.Send(Encoding.ASCII.GetBytes(s));
         }
 
-        void Connect(int flightInfoPort)
+        public Socket ConnectAsServer(int flightInfoPort)
         {
+            if (InfoSock != null)
+            {
+                InfoSock.Close();
+            }
 
 
             /*
@@ -33,6 +38,7 @@ namespace FlightSimulator.Model
                         App.ControlScreenVM.CommandsSock = server;
                         System.Windows.Forms.MessageBox.Show("Connected to server: " + server.RemoteEndPoint);
              */
+            return InfoSock;
         }
     }
 }

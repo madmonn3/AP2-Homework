@@ -14,6 +14,13 @@ namespace FlightSimulator.ViewModels
 {
     public class FlightScreenVM : BaseNotify
     {
+
+        private FlightModel model;
+
+        public FlightScreenVM(FlightModel m)
+        {
+            this.model = m;
+        }
         public Socket InfoSock { get; set; }
         #region Commands
         #region SettingsCommand
