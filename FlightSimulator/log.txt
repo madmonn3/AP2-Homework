@@ -1,0 +1,90 @@
+commit d8eb1a955ef6a5062543c14caab39afb8948bbd7
+Author: madmonn3 <noa.madmon@live.biu.ac.il>
+Date:   Mon Apr 29 20:35:19 2019 +0300
+
+    VM 1.7
+
+commit f377746f1a61abf2a27527154c6d647ddd37fc6f
+Author: madmonn3 <noa.madmon@live.biu.ac.il>
+Date:   Mon Apr 29 02:31:13 2019 +0300
+
+    VM 1.2
+
+commit ddc18c86b02608ab98f77857134ba8e319295c8c
+Author: nadavdor15 <46018347+nadavdor15@users.noreply.github.com>
+Date:   Sun Apr 28 23:19:44 2019 +0300
+
+    View 1.6 Nadav
+
+commit 5f49bd4cd89bdaa87b07f0b2ee50e1c27ee729d2
+Author: nadavdor15 <46018347+nadavdor15@users.noreply.github.com>
+Date:   Sat Apr 27 17:57:02 2019 +0300
+
+    View 1.5 Nadav
+
+commit 706b5db38a2265d0cdcde7a9fd4b78cffefac20a
+Author: nadavdor15 <46018347+nadavdor15@users.noreply.github.com>
+Date:   Sat Apr 27 17:06:12 2019 +0300
+
+    View 1.4 Nadav
+
+commit 3ac960bf751680710e63500ec319895b3d0aa6f0
+Merge: b38636a ee32763
+Author: madmonn3 <noa.madmon@live.biu.ac.il>
+Date:   Sat Apr 27 16:21:49 2019 +0300
+
+    view 1.5 Noa
+
+commit b38636af151b70fac86663499847f1a51e93afcc
+Author: madmonn3 <noa.madmon@live.biu.ac.il>
+Date:   Sat Apr 27 16:20:24 2019 +0300
+
+    view1.5 Noa
+
+commit ee3276399f74e12676fef54681c211b1c172c4f0
+Author: nadavdor15 <46018347+nadavdor15@users.noreply.github.com>
+Date:   Fri Apr 26 21:47:40 2019 +0300
+
+    View 1.4 Nadav
+
+commit 61488366b006f8ca840c81887c84fa299385b85b
+Author: nadavdor15 <46018347+nadavdor15@users.noreply.github.com>
+Date:   Fri Apr 26 14:46:54 2019 +0300
+
+    View1.3 Nadav
+
+commit d79df1d9289a1dd121b487fa72cdbae798b7fcc0
+Author: nadavdor15 <46018347+nadavdor15@users.noreply.github.com>
+Date:   Fri Apr 26 10:10:45 2019 +0300
+
+    Nadav's first commit
+
+commit d24374a3f95ee8165269afa9036c5ea5c73e3619
+Author: madmonn3 <noa.madmon@live.biu.ac.il>
+Date:   Wed Apr 24 21:34:32 2019 +0300
+
+    view 1.2
+
+commit dbad315469ce9eecaea0e8250f751e1000f85af7
+Author: madmonn3 <noa.madmon@live.biu.ac.il>
+Date:   Sun Apr 21 13:35:51 2019 +0300
+
+    view 1.0 unfinished.
+
+commit b9f49e5edce438f8aba83f1c38133ca056089cdc
+Author: madmonn3 <noa.madmon@live.biu.ac.il>
+Date:   Sat Apr 20 17:29:22 2019 +0300
+
+    1st commit
+
+commit 2c29c456c5e800c084dd219cb6145395e82c25f4
+Author: madmonn3 <noa.madmon@live.biu.ac.il>
+Date:   Sat Apr 20 04:43:40 2019 +0300
+
+    check commit
+
+commit 22f05f3d2c32b2986bcf29e82b23e1945f2b7e34
+Author: madmonn3 <46019025+madmonn3@users.noreply.github.com>
+Date:   Sat Apr 20 04:25:19 2019 +0300
+
+    Initial commit

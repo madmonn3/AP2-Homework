@@ -5,8 +5,9 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:FlightSimulator.Views"
              mc:Ignorable="d" 
+             xmlns:FlightSimulator="clr-namespace:FlightSimulator"
              d:DesignHeight="500" d:DesignWidth="500">
-    <Grid Cursor="">
+    <Grid Cursor="" DataContext="{x:Static FlightSimulator:App.ManualVM}">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
@@ -27,6 +28,22 @@
             </Label>
             <Slider Value="{Binding Throttle, UpdateSourceTrigger=PropertyChanged}" Orientation="Vertical" TickPlacement="TopLeft"  />
         </StackPanel>
-        <local:Joystick x:Name="joystick" Grid.Column="1" />
+        <Grid Grid.Column="1" Margin="3">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Label Content="←airlorn→" Grid.ColumnSpan="2" HorizontalAlignment="Center"/>
+            <Label Content="←elevator→" Grid.RowSpan="2" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Right">
+                <Label.LayoutTransform>
+                    <RotateTransform Angle="90"/>
+                </Label.LayoutTransform>
+            </Label>
+            <local:Joystick x:Name="joystick" Grid.Row="1" />
+        </Grid>
     </Grid>
 </UserControl>

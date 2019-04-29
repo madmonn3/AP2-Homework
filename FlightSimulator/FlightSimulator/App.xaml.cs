@@ -29,16 +29,29 @@ namespace FlightSimulator
             }
         }
 
-        private static ControlScreenVM controlScreenVM;
-        public static ControlScreenVM ControlScreenVM
+        private static AutoPilotVM autoPilotVM;
+        public static AutoPilotVM AutoPilotVM
         {
             get
             {
-                if (controlScreenVM == null)
+                if (autoPilotVM == null)
                 {
-                    controlScreenVM = new ControlScreenVM();
+                    autoPilotVM = new AutoPilotVM(FlightModel);
                 }
-                return controlScreenVM;
+                return autoPilotVM;
+            }
+        }
+
+        private static ManualVM manualVM;
+        public static ManualVM ManualVM
+        {
+            get
+            {
+                if (manualVM == null)
+                {
+                    manualVM = new ManualVM(FlightModel);
+                }
+                return manualVM;
             }
         }
 
@@ -55,7 +68,7 @@ namespace FlightSimulator
             }
         }
 
-                private static FlightModel flightModel;
+        private static FlightModel flightModel;
         public static FlightModel FlightModel
         {
             get
@@ -78,8 +91,7 @@ namespace FlightSimulator
 
         protected override void OnExit(ExitEventArgs e)
         {
-            ControlScreenVM?.CommandsSock.Close();
-            FlightScreenVM?.InfoSock.Close();
+            FlightModel.Close();
             base.OnExit(e);
         }
 

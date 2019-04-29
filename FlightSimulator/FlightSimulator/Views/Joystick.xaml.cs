@@ -47,14 +47,22 @@ namespace FlightSimulator.Views
         public double Aileron
         {
             get { return Convert.ToDouble(GetValue(AileronProperty)); }
-            set { SetValue(AileronProperty, value); }
+            set
+            {
+                SetValue(AileronProperty, value);
+                App.ManualVM.Aileron = value;
+            }
         }
 
         /// <summary>current Elevator (or "power"), from 0 to 100</summary>
         public double Elevator
         {
             get { return Convert.ToDouble(GetValue(ElevatorProperty)); }
-            set { SetValue(ElevatorProperty, value); }
+            set
+            {
+                SetValue(ElevatorProperty, value);
+                App.ManualVM.Elevator = value;
+            }
         }
 
         /// <summary>How often should be raised StickMove event in degrees</summary>

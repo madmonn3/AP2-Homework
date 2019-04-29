@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace FlightSimulator.ViewModels
 {
-    class ManualVM : BaseNotify
+    public class ManualVM : BaseNotify
     {
         private FlightModel model;
 
-        ManualVM(FlightModel m)
+        public ManualVM(FlightModel m)
         {
             this.model = m;
         }
@@ -29,9 +29,27 @@ namespace FlightSimulator.ViewModels
             set
             {
                 throttle = value;
+                this.model.Send("set controls/engines/current-engine/throttle " + (double)throttle / 100);
                 this.NotifyPropertyChanged("Throttle");
             }
         }
+
+        private double aileron;
+        public double Aileron
+        {
+            get
+            {
+                return aileron;
+            }
+
+            set
+            {
+                aileron = value;
+                this.model.Send("set controls/flight/aileron " + (double)aileron / 124);
+                NotifyPropertyChanged("Aileron");
+            }
+        }
+
         #endregion
 
         #region Rudder
@@ -46,10 +64,29 @@ namespace FlightSimulator.ViewModels
             set
             {
                 rudder = value;
+                this.model.Send("set controls/flight/rudder " + (double)rudder / 100);
                 this.NotifyPropertyChanged("Rudder");
             }
         }
         #endregion
+
+        private double elevator;
+        public double Elevator
+        {
+            get
+            {
+                return elevator;
+            }
+
+            set
+            {
+                {
+                    elevator = value;
+                    this.model.Send("set controls/flight/elevator " + (double)elevator / 124);
+                    NotifyPropertyChanged("Elevator");
+                }
+            }
+        }
         #endregion
     }
 }

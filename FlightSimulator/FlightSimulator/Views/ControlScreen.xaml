@@ -8,18 +8,19 @@
              xmlns:controls="clr-namespace:FlightSimulator.Views.Controls"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800" >
-    <Grid DataContext="{x:Static FlightSimulator:App.ControlScreenVM}">
+    <Grid>
         <Viewbox>
         <TabControl FontSize="12"
                     VerticalAlignment="Center"
-                    HorizontalAlignment="Center">
+                    HorizontalAlignment="Center"
+                    Margin="5">
             <TabItem Header="Manual">
-                    <controls:ManualControl/>
+                    <controls:ManualControl DataContext="{x:Static FlightSimulator:App.ManualVM}"/>
                 </TabItem>
             <TabItem Header="Auto Pilot"
                      VerticalAlignment="Stretch"
                      HorizontalAlignment="Stretch" >
-                    <controls:AutoControl/>
+                    <controls:AutoControl DataContext="{x:Static FlightSimulator:App.AutoPilotVM}"/>
                 </TabItem>
         </TabControl>
         </Viewbox>

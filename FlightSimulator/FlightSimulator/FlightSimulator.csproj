@@ -70,7 +70,7 @@
     <Compile Include="Model\Interface\ISettingsModel.cs" />
     <Compile Include="Settings.cs" />
     <Compile Include="ViewModels\AutoPilotVM.cs" />
-    <Compile Include="ViewModels\ControlScreenVM.cs" />
+    <Compile Include="ViewModels\ControlScreen1VM.cs" />
     <Compile Include="ViewModels\BaseNotify.cs" />
     <Compile Include="ViewModels\FlightScreenVM.cs" />
     <Compile Include="ViewModels\ManualVM.cs" />

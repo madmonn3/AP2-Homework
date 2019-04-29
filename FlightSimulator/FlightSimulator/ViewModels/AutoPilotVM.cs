@@ -8,11 +8,11 @@ using System.Windows.Input;
 
 namespace FlightSimulator.ViewModels
 {
-    class AutoPilotVM : BaseNotify
+    public class AutoPilotVM : BaseNotify
     {
         private FlightModel model;
 
-        AutoPilotVM(FlightModel m)
+        public AutoPilotVM(FlightModel m)
         {
             this.model = m;
         }

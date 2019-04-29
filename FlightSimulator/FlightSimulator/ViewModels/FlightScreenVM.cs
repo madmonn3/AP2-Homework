@@ -20,7 +20,9 @@ namespace FlightSimulator.ViewModels
         public FlightScreenVM(FlightModel m)
         {
             this.model = m;
+            model.UpdateListeners += UpdateParams;
         }
+
         public Socket InfoSock { get; set; }
         #region Commands
         #region SettingsCommand
@@ -52,20 +54,8 @@ namespace FlightSimulator.ViewModels
                 {
                     conncetCommand = new CommandHandler(delegate
                     {
-                        // connect as server
-                        // must move to MODEL!!!
-                        Socket client, listener = new Socket(SocketType.Stream, ProtocolType.Tcp);
-                        EndPoint endPoint = new IPEndPoint(IPAddress.Any, App.SettingsWindowVM.FlightInfoPort);
-                        listener.Bind(endPoint);
-                        listener.Listen(5);
-                        client = listener.Accept();
-                        System.Windows.Forms.MessageBox.Show("Connected to client: " + client.RemoteEndPoint);
-                        this.InfoSock = client;
-
-                        Socket server = new Socket(SocketType.Stream, ProtocolType.Tcp);
-                        server.Connect(App.SettingsWindowVM.FlightServerIP, App.SettingsWindowVM.FlightCommandPort);
-                        App.ControlScreenVM.CommandsSock = server;
-                        System.Windows.Forms.MessageBox.Show("Connected to server: " + server.RemoteEndPoint);
+                        model.ConnectAsServer(App.SettingsWindowVM.FlightInfoPort);
+                        model.ConnectAsClient(App.SettingsWindowVM.FlightServerIP, App.SettingsWindowVM.FlightCommandPort);
                     });
                 }
                 return conncetCommand;
@@ -74,15 +64,40 @@ namespace FlightSimulator.ViewModels
         #endregion
         #endregion
 
-
+        private double lon;
         public double Lon
         {
-            get;
+            get
+            {
+                return model.Lon;
+            }
+
+            set
+            {
+                lon = value;
+                NotifyPropertyChanged("Lon");
+            }
         }
 
+        private double lat;
         public double Lat
         {
-            get;
+            get
+            {
+                return model.Lat;
+            }
+
+            set
+            {
+                lat = value;
+                NotifyPropertyChanged("Lat");
+            }
+        }
+
+        private void UpdateParams(double lon, double lat)
+        {
+            Lon = lon;
+            Lat = lat;
         }
     }
 }
