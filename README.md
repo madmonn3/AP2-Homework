@@ -1,2 +1,3 @@
-# ex2AP
-Advanced Programming ex 2
+# gomework AP
+Advanced Programming 2
+NAdav Doron, Noa Madmon.
