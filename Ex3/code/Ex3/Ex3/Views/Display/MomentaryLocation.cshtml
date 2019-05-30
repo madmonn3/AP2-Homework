@@ -1,0 +1,23 @@
+﻿@{
+    ViewBag.Title = "MomentaryLocation";
+}
+<canvas id="mainCanvas"></canvas>
+<script language="javascript">
+    var lon = @ViewBag.lon;
+    var lat = @ViewBag.lat;
+    lon = (lon + 180) * (window.innerWidth / 360);
+    lat = (lat + 90) * (window.innerHeight / 180);
+    var canvas = document.getElementById("mainCanvas");
+    var context = canvas.getContext("2d");
+    canvas.width = document.documentElement.clientWidth;
+    canvas.height = document.documentElement.clientHeight;
+    var image = new Image();
+    image.src = "../../Content/export-map-share.png";
+    image.onload = function () {
+        context.drawImage(image, 0, 0, window.innerWidth, window.innerHeight);
+        context.fillStyle = "red";
+        context.beginPath();
+        context.arc(lon, lat, 6, 0, 2 * Math.PI);
+        context.fill();
+    }
+</script>

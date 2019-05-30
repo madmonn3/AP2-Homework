@@ -14,9 +14,27 @@ namespace Ex3
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
-                name: "Default",
-                url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
+                name: "MomentaryLocation",
+                url: "display/{ip}/{port}",
+                defaults: new { controller = "Display", action = "ConnectAndGetLocation" }
+            );
+
+            routes.MapRoute(
+                name: "DisplayRoute",
+                url: "display/{ip}/{port}/{rate}",
+                defaults: new { controller = "Display", action = "ConnectAndGetLocation" }
+            );
+
+            routes.MapRoute(
+                name: "GetFlightInfo",
+                url: "display/GetFlightInfo",
+                defaults: new { controller = "Display", action = "GetFlightInfo" }
+            );
+
+            routes.MapRoute(
+                name: "SaveRoute",
+                url: "save/{ip}/{port}/{rate}/{limit}/{filename}",
+                defaults: new { controller = "Display", action = "ConnectAndSave" }
             );
         }
     }

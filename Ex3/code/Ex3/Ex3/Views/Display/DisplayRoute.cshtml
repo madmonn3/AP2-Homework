@@ -1,0 +1,41 @@
+﻿@{
+    ViewBag.Title = "DisplayRoute";
+}
+<canvas id="mainCanvas"></canvas>
+<script language="javascript">
+    var canvas = document.getElementById("mainCanvas");
+    var context = canvas.getContext("2d");
+    canvas.width = document.documentElement.clientWidth;
+    canvas.height = document.documentElement.clientHeight;
+    var image = new Image();
+    image.src = "../../../Content/export-map-share.png";
+    image.onload = function () {
+        context.drawImage(image, 0, 0, window.innerWidth, window.innerHeight);
+        var input = { ip: "@ViewBag.ip", port: "@ViewBag.port" };
+        var intervalTime = 1000 / @ViewBag.rate;
+        var oldLon, oldLat, newLon = @ViewBag.lon, newLat = @ViewBag.Lat;
+        newLon = (newLon + 180) * (window.innerWidth / 360);
+        newLat = (newLat + 90) * (window.innerHeight / 180);
+        var myHandler = function () {
+            $.get("../../GetFlightInfo", input).done(function (xml) {
+                var xmlDocument = $.parseXML(xml);
+                oldLon = newLon;
+                oldLat = newLat;
+                newLon = parseFloat(xmlDocument.getElementsByTagName("Location")[0].getAttribute('longitude'));
+                newLat = parseFloat(xmlDocument.getElementsByTagName("Location")[0].getAttribute('latitude'));
+                newLon = (newLon + 180) * (window.innerWidth / 360);
+                newLat = (newLat + 90) * (window.innerHeight / 180);
+                console.log(newLon + "," + newLat);
+                context.strokeStyle = "red";
+                context.beginPath();
+                context.moveTo(oldLon, oldLat);
+                context.lineTo(newLon, newLat);
+                context.lineWidth = 5;
+                context.stroke();
+            });
+        }
+        setInterval(myHandler, intervalTime);
+    }
+
+    
+</script>
