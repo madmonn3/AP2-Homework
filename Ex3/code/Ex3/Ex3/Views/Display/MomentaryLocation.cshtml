@@ -15,9 +15,17 @@
     image.src = "../../Content/export-map-share.png";
     image.onload = function () {
         context.drawImage(image, 0, 0, window.innerWidth, window.innerHeight);
-        context.fillStyle = "red";
+        drawPoint(lon, lat, context);
+    }
+
+    function drawPoint(lon, lat, context) {
         context.beginPath();
-        context.arc(lon, lat, 6, 0, 2 * Math.PI);
+        context.arc(lon, lat, 7, 0, 2 * Math.PI);
+        context.fillStyle = "#2F528F";
+        context.fill();
+        context.beginPath();
+        context.arc(lon, lat, 4, 0, 2 * Math.PI);
+        context.fillStyle = "red";
         context.fill();
     }
 </script>

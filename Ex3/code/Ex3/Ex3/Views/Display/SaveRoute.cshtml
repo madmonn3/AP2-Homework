@@ -2,36 +2,86 @@
     ViewBag.Title = "SaveRoute";
 }
 
-<h2>SaveRoute</h2>
-<p>Saving the route <br />
-    from server "@ViewBag.ip:@ViewBag.port" <br />
-    at rate @ViewBag.rate times per second <br />
-    for @ViewBag.limit seconds <br />
-    into: "@ViewBag.filename"
-</p>
+
+<canvas id="mainCanvas"></canvas>
 <script language="javascript">
-    var xmlDocument;
+    var intervalId;
+    var left = @ViewBag.limit;
     var input = { ip: "@ViewBag.ip", port: "@ViewBag.port" };
+    var xmlDocument, oldLon, oldLat, newLon = @ViewBag.lon, newLat = @ViewBag.lat;
+    newLon = (newLon + 180) * (window.innerWidth / 360);
+    newLat = (newLat + 90) * (window.innerHeight / 180);
+    var canvas = document.getElementById("mainCanvas");
+    var context = canvas.getContext("2d");
+    canvas.width = document.documentElement.clientWidth;
+    canvas.height = document.documentElement.clientHeight;
+
     var myHandler = function () {
         $.get("../../../../../../Display/GetFlightInfo", input).done(function (xml) {
-            var xmlDoc = $.parseXML(xml);
-            var child = xmlDoc.getElementsByTagName("Location")[0];
-            var node = xmlDocument.getElementsByTagName("Location")[0];
-            node.appendChild(child);
-            alert(new XMLSerializer().serializeToString(xmlDocument));
+            if (left < @ViewBag.rate) {
+                clearInterval(intervalId);
+                $.ajax({
+                    url: '../../../../../../Display/SaveXml',
+                    data: JSON.stringify({ xml: new XMLSerializer().serializeToString(xmlDocument), fileName: "@ViewBag.fileName" }),
+                    type: 'POST',
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "text",
+                    success: function (succeeded) {
+                        if (succeeded == "True")
+                            alert('Saved xml to file: "@ViewBag.fileName"');
+                        else
+                            alert('The file "@ViewBag.fileName" does not exist!');
+                    }
+                });
+            } else {
+                left = left - @ViewBag.rate;
+                var newXml = $.parseXML(xml);
+                var child = newXml.getElementsByTagName("Location")[0];
+                var node = xmlDocument.getElementsByTagName("Locations")[0];
+                node.appendChild(child);
+                oldLon = newLon;
+                oldLat = newLat;
+                newLon = parseFloat(node.getAttribute("longitude"));
+                newLat = parseFloat(node.getAttribute("latitude"));
+                newLon = (newLon + 180) * (window.innerWidth / 360);
+                newLat = (newLat + 90) * (window.innerHeight / 180);
+                context.strokeStyle = "red";
+                context.beginPath();
+                context.moveTo(oldLon, oldLat);
+                context.lineTo(newLon, newLat);
+                context.lineWidth = 3;
+                context.stroke();
+            }
         })
     }
 
-    function saveToFile() {
-        var intervalTime = 1000 / @ViewBag.rate;
+
+    function showAndSave() {
+        context.drawImage(image, 0, 0, window.innerWidth, window.innerHeight);
+        drawPoint(newLon, newLat, context);
         $.get("../../../../../../Display/GetFlightInfo", input).done(function (xml) {
+            left = left - @ViewBag.rate;
             xmlDocument = $.parseXML(xml);
-            setInterval(myHandler, intervalTime);
-            // SLEEP
-            alert("Saved to file: @ViewBag.filename.");
-            alert(new XMLSerializer().serializeToString(xmlDocument));
+            intervalId = setInterval(myHandler, 1000 * @ViewBag.rate);
         });
     }
 
-    saveToFile();
+
+    var image = new Image();
+    image.src = "../../../../../../Content/export-map-share.png";
+    image.onload = function () {
+        showAndSave();
+    }
+
+
+    function drawPoint(lon, lat, context) {
+        context.beginPath();
+        context.arc(lon, lat, 7, 0, 2 * Math.PI);
+        context.fillStyle = "#2F528F";
+        context.fill();
+        context.beginPath();
+        context.arc(lon, lat, 4, 0, 2 * Math.PI);
+        context.fillStyle = "red";
+        context.fill();
+    }
 </script>

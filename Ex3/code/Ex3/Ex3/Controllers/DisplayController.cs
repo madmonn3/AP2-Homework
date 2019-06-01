@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
@@ -7,6 +8,7 @@ using System.Text;
 using System.Web;
 using System.Web.Mvc;
 using System.Xml;
+using System.Xml.Linq;
 using Ex3.Models;
 using Newtonsoft.Json.Linq;
 
@@ -67,6 +69,14 @@ namespace Ex3.Controllers
         {
             if (IsIPAddress(ip))
             {
+                IPAddress ipaddr = IPAddress.Parse(ip);
+                TcpClient client = DisplayModel.Instance.Connect(ipaddr, port);
+                double[] values = DisplayModel.Instance.GetMomentaryInformation(client);
+                if (values != null)
+                {
+                    ViewBag.lat = values[0];
+                    ViewBag.lon = values[1];
+                }
                 ViewBag.ip = ip;
                 ViewBag.port = port;
                 ViewBag.rate = rate;
@@ -85,6 +95,50 @@ namespace Ex3.Controllers
             TcpClient client = DisplayModel.Instance.Connect(ipaddr, port);
             double[] info = DisplayModel.Instance.GetMomentaryInformation(client);
             return InfoToXml(info);
+        }
+
+        [Route("display/SaveXml")]
+        [HttpPost]
+        public bool SaveXml(string xml, string fileName)
+        {
+            const string SCENARIO_FILE = "~/App_Data/Flights/{0}.xml";
+            string path = System.Web.HttpContext.Current.Server.MapPath(String.Format(SCENARIO_FILE, fileName));
+            if (System.IO.File.Exists(path))
+            {
+                string allLines = System.IO.File.ReadAllText(path);
+                
+                if (allLines == String.Empty)
+                {
+                    System.IO.StreamWriter file = new System.IO.StreamWriter(path, true);
+                    file.WriteLine(xml);
+                    file.Flush();
+                    file.Close();
+                }
+                else
+                {
+                    System.IO.File.Delete(path);
+                    string newXml;
+                    var xml1Descendants = XDocument.Parse(allLines).Descendants("Locations");
+                    var xml2Descendants = XDocument.Parse(xml).Descendants("Locations");
+                    var combinedUnique = xml1Descendants.Descendants("Location").Concat(xml2Descendants.Descendants("Location"));
+                    XmlDocument xmlDocument = new XmlDocument();
+                    xmlDocument.Load(new XElement("Locations", combinedUnique.ToArray()).CreateReader());
+                    using (var stringWriter = new StringWriter())
+                    using (var xmlTextWriter = XmlWriter.Create(stringWriter))
+                    {
+                        xmlDocument.WriteTo(xmlTextWriter);
+                        xmlTextWriter.Flush();
+                        newXml = stringWriter.GetStringBuilder().ToString();
+                    }
+                    System.IO.File.AppendAllText(path, newXml);
+                }
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+            
         }
 
         private string InfoToXml(double[] info)

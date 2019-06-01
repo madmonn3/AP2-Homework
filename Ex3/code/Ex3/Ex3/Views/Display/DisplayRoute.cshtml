@@ -12,10 +12,11 @@
     image.onload = function () {
         context.drawImage(image, 0, 0, window.innerWidth, window.innerHeight);
         var input = { ip: "@ViewBag.ip", port: "@ViewBag.port" };
-        var intervalTime = 1000 / @ViewBag.rate;
+        var intervalTime = 1000 * @ViewBag.rate;
         var oldLon, oldLat, newLon = @ViewBag.lon, newLat = @ViewBag.Lat;
         newLon = (newLon + 180) * (window.innerWidth / 360);
         newLat = (newLat + 90) * (window.innerHeight / 180);
+        drawPoint(newLon, newLat, context);
         var myHandler = function () {
             $.get("../../GetFlightInfo", input).done(function (xml) {
                 var xmlDocument = $.parseXML(xml);
@@ -25,17 +26,25 @@
                 newLat = parseFloat(xmlDocument.getElementsByTagName("Location")[0].getAttribute('latitude'));
                 newLon = (newLon + 180) * (window.innerWidth / 360);
                 newLat = (newLat + 90) * (window.innerHeight / 180);
-                console.log(newLon + "," + newLat);
                 context.strokeStyle = "red";
                 context.beginPath();
                 context.moveTo(oldLon, oldLat);
                 context.lineTo(newLon, newLat);
-                context.lineWidth = 5;
+                context.lineWidth = 3;
                 context.stroke();
             });
         }
         setInterval(myHandler, intervalTime);
     }
 
-    
+    function drawPoint(lon, lat, context) {
+        context.beginPath();
+        context.arc(lon, lat, 7, 0, 2 * Math.PI);
+        context.fillStyle = "#2F528F";
+        context.fill();
+        context.beginPath();
+        context.arc(lon, lat, 4, 0, 2 * Math.PI);
+        context.fillStyle = "red";
+        context.fill();
+    }
 </script>

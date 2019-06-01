@@ -36,6 +36,12 @@ namespace Ex3
                 url: "save/{ip}/{port}/{rate}/{limit}/{filename}",
                 defaults: new { controller = "Display", action = "ConnectAndSave" }
             );
+
+            routes.MapRoute(
+                name: "SaveXml",
+                url: "display/SaveXml",
+                defaults: new { controller = "Display", action = "SaveXml" }
+            );
         }
     }
 }
