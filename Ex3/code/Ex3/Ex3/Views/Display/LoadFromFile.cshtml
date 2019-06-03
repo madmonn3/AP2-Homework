@@ -1,0 +1,72 @@
+﻿@{
+    ViewBag.Title = "LoadFromFile";
+}
+
+<canvas id="mainCanvas"></canvas>
+<script language="javascript">
+    var readXml = function (xmlDocument, rate, context) {
+        var locations = xmlDocument.getElementsByTagName("Location");
+        if (locations.length <= 0) {
+            return;
+        }
+        var newLon = parseFloat(locations[0].getAttribute("longitude"));
+        var newLat = parseFloat(locations[0].getAttribute("latitude"));
+        newLon = (newLon + 180) * (window.innerWidth / 360);
+        newLat = (newLat + 90) * (window.innerHeight / 180);
+        drawPoint(newLon, newLat, context);
+        var i = 0, intervalId;
+        var myHandler = function () {
+            i++;
+            if (i >= locations.length) {
+                clearInterval(intervalId);
+                alert("Done reading from file.");
+                return;
+            }
+            var oldLon = newLon;
+            var oldLat = newLat;
+            newLon = parseFloat(locations[i].getAttribute("longitude"));
+            newLat = parseFloat(locations[i].getAttribute("latitude"));
+            newLon = (newLon + 180) * (window.innerWidth / 360);
+            newLat = (newLat + 90) * (window.innerHeight / 180);
+            context.strokeStyle = "red";
+            context.beginPath();
+            context.moveTo(oldLon, oldLat);
+            context.lineTo(newLon, newLat);
+            context.lineWidth = 3;
+            context.stroke();
+        }
+        intervalId = setInterval(myHandler, 1000 * rate);
+    }
+
+
+    function loadFromFile() {
+        context.drawImage(image, 0, 0, window.innerWidth, window.innerHeight);
+        $.post("../../Display/GetXml", input).done(function (xml) {
+            var xmlDocument = $.parseXML(xml);
+            readXml(xmlDocument, @ViewBag.rate, context);
+        });
+    }
+
+
+    function drawPoint(lon, lat, context) {
+        context.beginPath();
+        context.arc(lon, lat, 7, 0, 2 * Math.PI);
+        context.fillStyle = "#2F528F";
+        context.fill();
+        context.beginPath();
+        context.arc(lon, lat, 4, 0, 2 * Math.PI);
+        context.fillStyle = "red";
+        context.fill();
+    }
+
+    var input = { fileName: "@ViewBag.fileName" };
+    var canvas = document.getElementById("mainCanvas");
+    var context = canvas.getContext("2d");
+    canvas.width = document.documentElement.clientWidth;
+    canvas.height = document.documentElement.clientHeight;
+    var image = new Image();
+    image.src = "../../../Content/export-map-share.png";
+    image.onload = function () {
+        loadFromFile();
+    }
+</script>

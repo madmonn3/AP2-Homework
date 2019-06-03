@@ -42,6 +42,12 @@ namespace Ex3
                 url: "display/SaveXml",
                 defaults: new { controller = "Display", action = "SaveXml" }
             );
+
+            routes.MapRoute(
+                name: "GetXml",
+                url: "display/GetXml",
+                defaults: new { controller = "Display", action = "GetXml" }
+            );
         }
     }
 }

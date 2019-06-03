@@ -58,9 +58,14 @@ namespace Ex3.Controllers
                 {
                     return null;
                 }
-            } else
+            }
+            else
             {
-                return View("FromFile");
+                string fileName = ip;
+                int readingRate = port;
+                ViewBag.rate = readingRate;
+                ViewBag.fileName = fileName;
+                return View("LoadFromFile");
             }
         }
 
@@ -101,8 +106,7 @@ namespace Ex3.Controllers
         [HttpPost]
         public bool SaveXml(string xml, string fileName)
         {
-            const string SCENARIO_FILE = "~/App_Data/Flights/{0}.xml";
-            string path = System.Web.HttpContext.Current.Server.MapPath(String.Format(SCENARIO_FILE, fileName));
+            string path = System.Web.HttpContext.Current.Server.MapPath(String.Format(DisplayModel.Instance.SCENARIO_FILE, fileName));
             if (System.IO.File.Exists(path))
             {
                 string allLines = System.IO.File.ReadAllText(path);
@@ -139,6 +143,21 @@ namespace Ex3.Controllers
                 return false;
             }
             
+        }
+
+        [Route("display/GetXml")]
+        [HttpPost]
+        public string GetXml(string fileName)
+        {
+            string path = System.Web.HttpContext.Current.Server.MapPath(String.Format(DisplayModel.Instance.SCENARIO_FILE, fileName));
+            if (System.IO.File.Exists(path))
+            {
+                return System.IO.File.ReadAllText(path);
+            }
+            else
+            {
+                return null;
+            }
         }
 
         private string InfoToXml(double[] info)

@@ -41,14 +41,16 @@
                 node.appendChild(child);
                 oldLon = newLon;
                 oldLat = newLat;
-                newLon = parseFloat(node.getAttribute("longitude"));
-                newLat = parseFloat(node.getAttribute("latitude"));
+                newLon = parseFloat(child.getAttribute("longitude"));
+                newLat = parseFloat(child.getAttribute("latitude"));
                 newLon = (newLon + 180) * (window.innerWidth / 360);
                 newLat = (newLat + 90) * (window.innerHeight / 180);
                 context.strokeStyle = "red";
                 context.beginPath();
                 context.moveTo(oldLon, oldLat);
+                console.log("moveTo: ", oldLon, oldLat);
                 context.lineTo(newLon, newLat);
+                console.log("lineTo: ", newLon, newLat);
                 context.lineWidth = 3;
                 context.stroke();
             }
@@ -60,6 +62,10 @@
         context.drawImage(image, 0, 0, window.innerWidth, window.innerHeight);
         drawPoint(newLon, newLat, context);
         $.get("../../../../../../Display/GetFlightInfo", input).done(function (xml) {
+            if (xml == null) {
+                alert("File does not exists");
+                return;
+            }
             left = left - @ViewBag.rate;
             xmlDocument = $.parseXML(xml);
             intervalId = setInterval(myHandler, 1000 * @ViewBag.rate);

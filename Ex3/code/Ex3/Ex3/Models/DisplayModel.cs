@@ -23,6 +23,14 @@ namespace Ex3.Models
             }
         }
 
+        public string SCENARIO_FILE
+        {
+            get
+            {
+                return "~/App_Data/Flights/{0}.xml";
+            }
+        }
+
         private DisplayModel() { }
 
         public TcpClient Connect(IPAddress ip, int port)
