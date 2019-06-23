@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class LoginActivity extends AppCompatActivity {
     Button connect;
@@ -24,9 +25,14 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(LoginActivity.this , JoystickActivity.class);
-                i.putExtra("IP", ip.getText().toString().trim());
-                i.putExtra("PORT", Integer.parseInt(port.getText().toString().trim()));
-                startActivity(i);
+                String ip_str = ip.getText().toString().trim();
+                String port_str = port.getText().toString().trim();
+                if (!ip_str.equals("") && !port_str.equals("")) {
+                    i.putExtra("IP", ip_str);
+                    i.putExtra("PORT", Integer.parseInt(port.getText().toString().trim()));
+                    startActivity(i);
+                } else
+                    Toast.makeText(LoginActivity.this, "IP or Port is empty", Toast.LENGTH_LONG).show();
             }
         });
     }
